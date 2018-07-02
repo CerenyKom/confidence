@@ -92,3 +92,27 @@ $('#register').on('submit', function (e){
 
 //fin
 
+function change_contenu(uri) {
+    $.ajax({
+        type: 'GET',
+        url: uri,
+        timeout: 3000,
+        success: function (data) {
+            $('#baniere-dynamic').html(data);
+        },
+        error: function () {
+            alert('La requête n\'a pas abouti');
+        }
+    });
+}
+
+$('.detect1').on('click', function (e) {
+    e.preventDefault();
+    change_contenu("{{route('Posts.index')}}");
+});
+
+$('.detect2').on('click', function (e) {
+    e.preventDefault();
+    change_contenu("{{route('Utilisateur.index')}}");
+});
+
