@@ -2,13 +2,15 @@
   <div class="ui comments">
       <div>
         <div class="box_Pos">
-        <textarea name="post" id="" cols="90" rows="3" class="form-control" placeholder="Exprime toi...!"></textarea>
+        <form>
+             <textarea v-model="post" id="" cols="90" rows="3" class="form-control" placeholder="Exprime toi...!"></textarea>
         <div class="element">
             <button type="button" class="btn-default"> <i class="fa fa-camera"></i></button>
             <button type="button" class="btn-default"> <i class="fa fa-video-camera"></i></button>
             <button type="button" class="btn-default"> <i class="fa fa-microphone"></i></button>
-            <button type="button" class="btn-default pull-right"> <i class="fa fa-send"></i>Submit</button>
+            <button type="button" class="btn-default pull-right"  @click="addPost"> <i class="fa fa-send"></i>Submit</button>
         </div>
+        </form>
         </div>
       </div>
       <br>
@@ -65,6 +67,14 @@
           axios.get('/Post').then((Response)=> {
              this.posts = Response.data
          })
+       },
+
+       methods : {
+          addPost(){
+             axios.post('/Post',  {params: {titre_post: 'orange', contenue_post: 'orange'}}).then((Response)=> {
+             this.posts.push(Response.data)
+         })
+          }
        }
     }
 </script>

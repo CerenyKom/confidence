@@ -44279,6 +44279,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -44298,6 +44300,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/Post').then(function (Response) {
             _this.posts = Response.data;
         });
+    },
+
+    methods: {
+        addPost: function addPost() {
+            var _this2 = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/Post', { params: { titre_post: 'orange', contenue_post: 'orange' } }).then(function (Response) {
+                _this2.posts.push(Response.data);
+            });
+        }
     }
 });
 
@@ -44822,7 +44834,56 @@ var render = function() {
     "div",
     { staticClass: "ui comments" },
     [
-      _vm._m(0),
+      _c("div", [
+        _c("div", { staticClass: "box_Pos" }, [
+          _c("form", [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.post,
+                  expression: "post"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                id: "",
+                cols: "90",
+                rows: "3",
+                placeholder: "Exprime toi...!"
+              },
+              domProps: { value: _vm.post },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.post = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "element" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn-default pull-right",
+                  attrs: { type: "button" },
+                  on: { click: _vm.addPost }
+                },
+                [_c("i", { staticClass: "fa fa-send" }), _vm._v("Submit")]
+              )
+            ])
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
@@ -44903,49 +44964,31 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "box_Pos" }, [
-        _c("textarea", {
-          staticClass: "form-control",
-          attrs: {
-            name: "post",
-            id: "",
-            cols: "90",
-            rows: "3",
-            placeholder: "Exprime toi...!"
-          }
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "element" }, [
-          _c(
-            "button",
-            { staticClass: "btn-default", attrs: { type: "button" } },
-            [_c("i", { staticClass: "fa fa-camera" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn-default", attrs: { type: "button" } },
-            [_c("i", { staticClass: "fa fa-video-camera" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn-default", attrs: { type: "button" } },
-            [_c("i", { staticClass: "fa fa-microphone" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn-default pull-right",
-              attrs: { type: "button" }
-            },
-            [_c("i", { staticClass: "fa fa-send" }), _vm._v("Submit")]
-          )
-        ])
-      ])
-    ])
+    return _c(
+      "button",
+      { staticClass: "btn-default", attrs: { type: "button" } },
+      [_c("i", { staticClass: "fa fa-camera" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn-default", attrs: { type: "button" } },
+      [_c("i", { staticClass: "fa fa-video-camera" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn-default", attrs: { type: "button" } },
+      [_c("i", { staticClass: "fa fa-microphone" })]
+    )
   }
 ]
 render._withStripped = true

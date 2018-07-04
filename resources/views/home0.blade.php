@@ -320,7 +320,7 @@
                 <div class="col-sm-4">
                     <p class="text-center">CERENY KOM</p><br>
                     <a href="#demo" data-toggle="collapse" id="toftem">
-                        <img src="{{asset('assets/css/img/1.jpg')}} " class="img-rounded img-responsive" alt="Random Name">
+                        <img src="#" class="img-rounded img-responsive" alt="Random Name">
                     </a>
                     <div id="demo" class="collapse">
                         <p>Guitarist and Lead Vocalist</p>
@@ -329,7 +329,7 @@
                 </div>
                 <div class="col-sm-4">
                     <p class="text-center">LOIC FONGANG</p><br>
-                    <a href="#demo2" data-toggle="collapse">
+                    <a href="#demo2" data-toggle="collap    se">
                         <div class="img-rounded img-responsive"></div>
                     </a>
                     <div id="demo2" class="collapse">
