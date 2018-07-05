@@ -3,7 +3,7 @@
       <div>
         <div class="box_Pos">
         <form>
-             <textarea v-model="post" id="" cols="90" rows="3" class="form-control" placeholder="Exprime toi...!"></textarea>
+             <textarea v-model="post_content" id="" cols="90" rows="3" class="form-control" placeholder="Exprime toi...!"></textarea>
         <div class="element">
             <button type="button" class="btn-default"> <i class="fa fa-camera"></i></button>
             <button type="button" class="btn-default"> <i class="fa fa-video-camera"></i></button>
@@ -69,11 +69,13 @@
          })
        },
 
+       props : {
+         post_content : String
+       },
+
        methods : {
           addPost(){
-             axios.post('/Post',  {params: {titre_post: 'orange', contenue_post: 'orange'}}).then((Response)=> {
-             this.posts.push(Response.data)
-         })
+            this.posts.push('le vin')
           }
        }
     }

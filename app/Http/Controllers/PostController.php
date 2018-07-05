@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = user_post::all();
+        $post =  user_post::all();
         return Response::json($post, 200, [], JSON_NUMERIC_CHECK);
     }
 

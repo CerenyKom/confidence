@@ -44286,31 +44286,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            posts: []
-        };
-    },
+  data: function data() {
+    return {
+      posts: []
+    };
+  },
 
 
-    components: { comments: __WEBPACK_IMPORTED_MODULE_1__comments_vue___default.a },
-    mounted: function mounted() {
-        var _this = this;
+  components: { comments: __WEBPACK_IMPORTED_MODULE_1__comments_vue___default.a },
+  mounted: function mounted() {
+    var _this = this;
 
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/Post').then(function (Response) {
-            _this.posts = Response.data;
-        });
-    },
+    __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/Post').then(function (Response) {
+      _this.posts = Response.data;
+    });
+  },
 
-    methods: {
-        addPost: function addPost() {
-            var _this2 = this;
+  props: {
+    post_content: String
+  },
 
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/Post', { params: { titre_post: 'orange', contenue_post: 'orange' } }).then(function (Response) {
-                _this2.posts.push(Response.data);
-            });
-        }
+  methods: {
+    addPost: function addPost() {
+      this.posts.push('le vin');
     }
+  }
 });
 
 /***/ }),
@@ -44842,8 +44842,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.post,
-                  expression: "post"
+                  value: _vm.post_content,
+                  expression: "post_content"
                 }
               ],
               staticClass: "form-control",
@@ -44853,13 +44853,13 @@ var render = function() {
                 rows: "3",
                 placeholder: "Exprime toi...!"
               },
-              domProps: { value: _vm.post },
+              domProps: { value: _vm.post_content },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.post = $event.target.value
+                  _vm.post_content = $event.target.value
                 }
               }
             }),
