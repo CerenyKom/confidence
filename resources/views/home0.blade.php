@@ -417,7 +417,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input class="form-control btn btn-primary" type="submit" value="Envoyer" >
+                        <input class="form-control btn btn-default" type="submit" value="Envoyer" >
                     </div>
                 </form>
 
@@ -425,6 +425,5 @@
             <div class="col-lg-2"></div>
         </div>
     </section>
-
 
 @endsection

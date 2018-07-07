@@ -51,7 +51,6 @@
                                 </li>
                                 @if(Auth::user()->admn == 1 )
                                     <li>
-
                                         <a href="{{route('acceuil')}}" class="fa fa-cog"> Administration</a>
                                     </li>
                                 @endif

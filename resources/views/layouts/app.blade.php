@@ -19,6 +19,6 @@
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.easing.1.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
-        @include('flashy::message')
+         @include('flashy::message')
 </body>
 </html>
