@@ -16,6 +16,7 @@
         @include('partials._navbar')
             @yield('content')
         @include('partials._footer')
+    <script type="text/javascript" src="//localhost:6001/socket.io/socket.io.js"></script>     
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/jquery.easing.1.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>

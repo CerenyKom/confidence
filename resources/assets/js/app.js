@@ -13,10 +13,20 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+import Echo from 'laravel-echo'
 import Vuex from 'vuex'
 Vue.use(Vuex);
 const app = new Vue({
     el:'#app',
     render: h => h(require('./components/posts.vue'))
 });
+
+let e = new Echo({
+    broadcaster: 'socket.io',
+    host: window.location.hostname + ':6001'
+})
+
+e.channel('channel-demo')
+  .listen('PostCreatedEvent', (e) => {
+      console.log(e)
+  })

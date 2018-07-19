@@ -1,9 +1,8 @@
 <template>
   <div class="ui comments">
-    <!-- <div class="ui inverted active dimmer" v-if="loading">
+    <div class="ui inverted active dimmer" v-if="loading">
        <div class="ui text loader"> Recuperation des commentaires ... </div>
-    </div> -->
-    {{comments}}
+    </div>
     <comment :comment="comment"  v-bind:index="index"  v-bind:key="comment.id" v-for="(comment, index) in comments"></comment>
     <comment-form :id="id" :model="model" :reply="0"></comment-form>
   </div>
@@ -22,30 +21,25 @@
     export default{
         store,
         components: {comment, commentForm},
-        // data(){
-        //    return {
-        //        comments: [],
-        //        loading : true
-        //    } 
-        // },
-        store,
-        vuex: {
-          getters : {
-             comments : (state) => state.comments
-          },
-          actions : {
-             
-          }
+        data(){
+           return {
+               comments: [],
+               loading : true
+           } 
         },
+        // store,
+        // vuex: {
+        //   getters : {
+        //      comments : (state) => state.comments
+        //   },
+        //   actions : {
+             
+        //   }
+        // },
         props : { 
             id : Number,
             model: String
         },
-
-        computed : {
-            ...Vuex.mapGetters(['comments'])
-        },
-
         mounted : function () {
           axios.get('/Comment', {params: {id: this.id, type: this.model}}).then((Response)=> {
             this.comments = Response.data;

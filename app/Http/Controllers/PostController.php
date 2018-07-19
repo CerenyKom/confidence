@@ -7,6 +7,7 @@ use App\Models\user_post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
+use App\Events\PostCreatedEvent;
 
 class PostController extends Controller
 {
@@ -26,6 +27,8 @@ class PostController extends Controller
      */
     public function index()
     {
+        $event = new PostCreatedEvent();
+        event($event);
         $post =  user_post::all();
         return Response::json($post, 200, [], JSON_NUMERIC_CHECK);
     }
