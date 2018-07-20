@@ -13,11 +13,8 @@
     import axios from 'axios'
     import comment from './comments/comment.vue'
     import commentForm from './comments/form.vue'
-    import store from '../store/store'
-
 
     export default{
-        store,
 
         components: {comment, commentForm},
         data(){

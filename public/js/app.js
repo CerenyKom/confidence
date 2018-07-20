@@ -13047,7 +13047,9 @@ module.exports = __webpack_require__(57);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_echo__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_posts_vue__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_posts_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_posts_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__store_store__ = __webpack_require__(51);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -13065,12 +13067,12 @@ window.Vue = __webpack_require__(11);
  */
 
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
-var app = new Vue({
+
+
+new Vue({
     el: '#app',
-    render: function render(h) {
-        return h(__webpack_require__(42));
-    }
+    store: __WEBPACK_IMPORTED_MODULE_2__store_store__["a" /* default */],
+    components: { post: __WEBPACK_IMPORTED_MODULE_1__components_posts_vue___default.a }
 });
 
 var e = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
@@ -13080,11 +13082,6 @@ var e = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
 
 e.channel('channel-demo').listen('PostCreatedEvent', function (e) {
     console.log(e);
-});
-
-$('#post').click(function (e) {
-    e.preventDefault();
-    $.get('/post');
 });
 
 /***/ }),
@@ -45178,12 +45175,13 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__comments_vue__ = __webpack_require__(44);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__comments_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__comments_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__posts_form__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__posts_form___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__posts_form__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_store__ = __webpack_require__(51);
 //
 //
 //
@@ -45233,15 +45231,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+global.store = __WEBPACK_IMPORTED_MODULE_3__store_store__["a" /* default */];
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: { comments: __WEBPACK_IMPORTED_MODULE_1__comments_vue___default.a, postForm: __WEBPACK_IMPORTED_MODULE_2__posts_form___default.a },
-
+    store: __WEBPACK_IMPORTED_MODULE_3__store_store__["a" /* default */],
     data: function data() {
         return {
             posts: []
         };
     },
+
 
     mounted: function mounted() {
         var _this = this;
@@ -45249,17 +45251,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/Post').then(function (Response) {
             _this.posts = Response.data;
         });
-    },
-    methods: {
-        addPost: function addPost() {
-            var _this2 = this;
-
-            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/Post', { titre_post: this.post_title, contenue_post: this.post_content }).then(function (Response) {
-                _this2.posts.unshift(Response.data);
-            });
-        }
     }
+
 });
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(2)))
 
 /***/ }),
 /* 44 */
@@ -45320,7 +45315,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__comments_comment_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__comments_comment_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__comments_form_vue__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__comments_form_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__comments_form_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store_store__ = __webpack_require__(51);
 //
 //
 //
@@ -45331,7 +45325,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
 
 
 
@@ -45339,7 +45332,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    store: __WEBPACK_IMPORTED_MODULE_3__store_store__["a" /* default */],
 
     components: { comment: __WEBPACK_IMPORTED_MODULE_1__comments_comment_vue___default.a, commentForm: __WEBPACK_IMPORTED_MODULE_2__comments_form_vue___default.a },
     data: function data() {
@@ -45665,7 +45657,6 @@ if (false) {
 
 "use strict";
 /* unused harmony export state */
-/* unused harmony export getters */
 /* unused harmony export mutations */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__(11);
@@ -45674,58 +45665,54 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 
-__WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */]);
-var state = {
-    comments: []
-};
 
-var getters = {
-    comments: function comments(state) {
-        return state.comments;
-    }
+
+__WEBPACK_IMPORTED_MODULE_1_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */]);
+
+var state = {
+  comments: ['1', '2']
 };
 
 var mutations = {
-    ADD_COMMENTS: function ADD_COMMENTS(state, comments) {
-        var _state$comments;
+  ADD_COMMENTS: function ADD_COMMENTS(state, comments) {
+    var _state$comments;
 
-        (_state$comments = state.comments).push.apply(_state$comments, _toConsumableArray(comments));
-    },
-    ADD_COMMENT: function ADD_COMMENT(state, comment) {
-        if (comment.reponse) {
-            var c = state.comment.find(function (c) {
-                return c.id === comment.reponse;
-            });
-            if (c.replies === undefined) {
-                c.replies = [];
-            }
-            c.replies.push(comment);
-        } else {
-            state.comments.push(comment);
-        }
-    },
-    DELETE_COMMENT: function DELETE_COMMENT(state, comment) {
-        if (comment.reponse) {
-            var parent = state.comment.find(function (c) {
-                return c.id === comment.reponse;
-            });
-            var index = parent.replies.findIndex(function (c) {
-                return c.id === comment.id;
-            });
-            parent.replies.splice(index, 1);
-        } else {
-            var _index = state.comments.findIndex(function (c) {
-                return c.id === comment.id;
-            });
-            state.comments.splice(_index, 1);
-        }
+    (_state$comments = state.comments).push.apply(_state$comments, _toConsumableArray(comments));
+  },
+  ADD_COMMENT: function ADD_COMMENT(state, comment) {
+    if (comment.reponse) {
+      var c = state.comment.find(function (c) {
+        return c.id === comment.reponse;
+      });
+      if (c.replies === undefined) {
+        c.replies = [];
+      }
+      c.replies.push(comment);
+    } else {
+      state.comments.push(comment);
     }
+  },
+  DELETE_COMMENT: function DELETE_COMMENT(state, comment) {
+    if (comment.reponse) {
+      var parent = state.comment.find(function (c) {
+        return c.id === comment.reponse;
+      });
+      var index = parent.replies.findIndex(function (c) {
+        return c.id === comment.id;
+      });
+      parent.replies.splice(index, 1);
+    } else {
+      var _index = state.comments.findIndex(function (c) {
+        return c.id === comment.id;
+      });
+      state.comments.splice(_index, 1);
+    }
+  }
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_0_vuex__["a" /* default */].Store({
-    state: state,
-    getters: getters,
-    mutations: mutations
+  state: state,
+  mutations: mutations
 }));
 
 /***/ }),
@@ -45837,12 +45824,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             post_title: '',
             post_content: ''
         };
+    },
+
+
+    methods: {
+        addPost: function addPost() {
+            axios.post('/Post', { titre_post: this.post_title, contenue_post: this.post_content }).then(function (Response) {});
+        }
     }
 });
 
@@ -45854,53 +45849,70 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("form", { attrs: { action: "" } }, [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.post_title,
-          expression: "post_title"
-        }
-      ],
-      staticClass: "form-control",
-      attrs: { type: "text", placeholder: "titre" },
-      domProps: { value: _vm.post_title },
+  return _c(
+    "form",
+    {
+      attrs: { action: "" },
       on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.post_title = $event.target.value
+        submit: function($event) {
+          $event.preventDefault()
+          return _vm.addPost($event)
         }
       }
-    }),
-    _vm._v(" "),
-    _c("textarea", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.post_content,
-          expression: "post_content"
-        }
-      ],
-      staticClass: "form-control",
-      attrs: { id: "", cols: "90", rows: "3", placeholder: "Exprime toi...!" },
-      domProps: { value: _vm.post_content },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+    },
+    [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.post_title,
+            expression: "post_title"
           }
-          _vm.post_content = $event.target.value
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "titre" },
+        domProps: { value: _vm.post_title },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.post_title = $event.target.value
+          }
         }
-      }
-    }),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
+      }),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.post_content,
+            expression: "post_content"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: {
+          id: "",
+          cols: "90",
+          rows: "3",
+          placeholder: "Exprime toi...!"
+        },
+        domProps: { value: _vm.post_content },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.post_content = $event.target.value
+          }
+        }
+      }),
+      _vm._v(" "),
+      _vm._m(0)
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -45949,7 +45961,19 @@ var render = function() {
     "div",
     { staticClass: "ui comments" },
     [
-      _c("div", [_c("div", { staticClass: "box_Pos" }, [_c("post-form")], 1)]),
+      _c("div", [
+        _c(
+          "div",
+          { staticClass: "box_Pos" },
+          [
+            _c("post-form", {
+              attrs: { posts: "posts" },
+              on: { submit: _vm.monaction }
+            })
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),

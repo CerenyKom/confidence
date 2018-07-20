@@ -1,5 +1,5 @@
 <template>
-    <form action="" >
+    <form action="" @submit.prevent="addPost">
         <input type="text" class="form-control" v-model="post_title" placeholder="titre">
         <textarea v-model="post_content" id="" cols="90" rows="3" class="form-control" placeholder="Exprime toi...!"></textarea>
         <div class="element">
@@ -12,11 +12,21 @@
 </template>
 
 <script>
+
     export default {
+
         data(){
             return {
                 post_title : '',
                 post_content : ''
+            }
+        },
+
+        methods : {
+            addPost: function(){
+                axios.post('/Post',  {titre_post : this.post_title, contenue_post : this.post_content}).then((Response)=> {
+
+               })
             }
         }
     }

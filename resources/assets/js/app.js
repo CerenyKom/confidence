@@ -14,11 +14,13 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import Echo from 'laravel-echo'
-import Vuex from 'vuex'
-Vue.use(Vuex);
-const app = new Vue({
+import post from './components/posts.vue'
+import store from './store/store'
+
+new Vue({
     el:'#app',
-    render: h => h(require('./components/posts.vue'))
+    store,
+    components: {post}
 });
 
 let e = new Echo({
@@ -29,9 +31,4 @@ let e = new Echo({
 e.channel('channel-demo')
   .listen('PostCreatedEvent', (e) => {
       console.log(e)
-});
-
-$('#post').click(function (e) {
-    e.preventDefault();
-    $.get('/post')
 });

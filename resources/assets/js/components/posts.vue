@@ -2,7 +2,7 @@
   <div class="ui comments">
       <div>
         <div class="box_Pos">
-           <post-form></post-form>
+           <post-form posts="posts" @submit="monaction"></post-form>
         </div>
       </div>
       <br>
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                       </div>
-                    </div>  
+                    </div>
                     <hr>
                     <div class="comment">
                         <comments model="Post" :id="post.id"></comments>
@@ -47,26 +47,24 @@
     import axios from 'axios'
     import comments from './comments.vue'
     import postForm from './posts/form'
+    import store from "../store/store";
+
+    global.store = store;
 
     export default {
         components: {comments, postForm},
-
+        store,
         data(){
             return {
-                posts : []
+               posts : []
             }
         },
+
         mounted : function () {
           axios.get('/Post').then((Response)=> {
              this.posts = Response.data
          })
        },
-       methods : {
-          addPost(){
-              axios.post('/Post',  {titre_post : this.post_title, contenue_post: this.post_content}).then((Response)=> {
-                  this.posts.unshift(Response.data)
-              });
-          }
-       }
+
     }
 </script>
