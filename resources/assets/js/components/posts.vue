@@ -2,15 +2,7 @@
   <div class="ui comments">
       <div>
         <div class="box_Pos">
-        <form>
-             <textarea v-model="post_content" id="" cols="90" rows="3" class="form-control" placeholder="Exprime toi...!"></textarea>
-        <div class="element">
-            <button type="button" class="btn-default"> <i class="fa fa-camera"></i></button>
-            <button type="button" class="btn-default"> <i class="fa fa-video-camera"></i></button>
-            <button type="button" class="btn-default"> <i class="fa fa-microphone"></i></button>
-            <button type="button" class="btn-default pull-right"  @click="addPost"> <i class="fa fa-send"></i>Submit</button>
-        </div>
-        </form>
+           <post-form></post-form>
         </div>
       </div>
       <br>
@@ -44,7 +36,7 @@
                     <hr>
                     <div class="comment">
                         <comments model="Post" :id="post.id"></comments>
-                    </div>     
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,28 +46,26 @@
 <script type="text/babel">
     import axios from 'axios'
     import comments from './comments.vue'
+    import postForm from './posts/form'
 
     export default {
+        components: {comments, postForm},
+
         data(){
             return {
-                posts : [] 
+                posts : []
             }
         },
-         
-        components: {comments},
         mounted : function () {
           axios.get('/Post').then((Response)=> {
              this.posts = Response.data
          })
        },
-
-       props : {
-         post_content : String
-       },
-
        methods : {
           addPost(){
-            this.posts.push('le vin')
+              axios.post('/Post',  {titre_post : this.post_title, contenue_post: this.post_content}).then((Response)=> {
+                  this.posts.unshift(Response.data)
+              });
           }
        }
     }

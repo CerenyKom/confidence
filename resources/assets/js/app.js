@@ -24,9 +24,14 @@ const app = new Vue({
 let e = new Echo({
     broadcaster: 'socket.io',
     host: window.location.hostname + ':6001'
-})
+});
 
 e.channel('channel-demo')
   .listen('PostCreatedEvent', (e) => {
       console.log(e)
-  })
+});
+
+$('#post').click(function (e) {
+    e.preventDefault();
+    $.get('/post')
+});

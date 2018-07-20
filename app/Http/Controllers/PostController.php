@@ -27,9 +27,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $event = new PostCreatedEvent();
-        event($event);
-        $post =  user_post::all();
+        $post =  user_post::where('id', '>', '0')->orderBy('id', 'DESC')->get() ;
         return Response::json($post, 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -56,6 +54,9 @@ class PostController extends Controller
             'contenue_post' => $request->post,
             'user_id' => Auth::user()->id,
         ]);
+        $event = new PostCreatedEvent(['titre' => 'titre']);
+        broadcast($event)->toOthers();
+        dd();
         return Response::json($newpost, 200, [], JSON_NUMERIC_CHECK);
     }
 
