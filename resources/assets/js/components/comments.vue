@@ -13,16 +13,29 @@
     import axios from 'axios'
     import comment from './comments/comment.vue'
     import commentForm from './comments/form.vue'
-
+    import store from '../store/store'
+    import Vuex from 'vuex'
     export default{
 
         components: {comment, commentForm},
         data(){
            return {
-               comments: [],
                loading : true
            } 
         },
+
+        store,
+        methods : {
+            ...Vuex.mapActions([
+                'getComments',
+                'addComments'
+            ])
+        },
+
+        computed: {
+            ...Vuex.mapGetters([
+                'comments'
+            ])},
 
         props : { 
             id : Number,
@@ -31,7 +44,7 @@
 
         mounted : function () {
           axios.get('/Comment', {params: {id: this.id, type: this.model}}).then((Response)=> {
-            this.comments = Response.data;
+            this.getComments(Response.data);
             this.loading = false
          })
        }

@@ -49,14 +49,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $newpost = Post::create([
+        Post::create([
             'titre_post' => $request->titre_post,
             'contenue_post' => $request->contenue_post,
             'user_id' => Auth::user()->id,
         ]);
+        $newpost =  user_post::orderBy('created_at', 'DESC')->first();
         $event = new PostCreatedEvent($newpost->toArray());
         broadcast($event)->toOthers();
-
          return Response::json($newpost, 200, [], JSON_NUMERIC_CHECK);
     }
 

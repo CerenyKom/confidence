@@ -2,10 +2,13 @@
   <div class="ui comments">
       <div>
         <div class="box_Pos">
-           <post-form posts="posts" @submit="monaction"></post-form>
+           <post-form posts="posts"></post-form>
         </div>
       </div>
       <br>
+      <div class="ui inverted active dimmer" v-if="loading">
+          <div class="ui text loader">Recuperation des posts ...</div>
+      </div>
       <div v-bind:key="post.id" v-for="post in posts">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -48,21 +51,34 @@
     import comments from './comments.vue'
     import postForm from './posts/form'
     import store from "../store/store";
+    import Vuex from "vuex";
 
     global.store = store;
 
     export default {
+        data(){
+           return {
+               loading : true
+           }
+        },
+
         components: {comments, postForm},
         store,
-        data(){
-            return {
-               posts : []
-            }
+        methods : {
+            ...Vuex.mapActions([
+               'getPosts'
+                ])
         },
+
+        computed: {
+            ...Vuex.mapGetters([
+             'posts'
+        ])},
 
         mounted : function () {
           axios.get('/Post').then((Response)=> {
-             this.posts = Response.data
+              this.loading = false;
+              this.getPosts(Response.data)
          })
        },
 

@@ -5,7 +5,13 @@ import Vue from 'vue'
 Vue.use(Vuex);
 
 export const state = {
-    comments : ['1', '2']
+    comments : [],
+    posts: []
+};
+
+export const getters = {
+    comments : (state) => state.comments,
+    posts : (state) => state.posts
 };
 
 
@@ -26,6 +32,14 @@ export const mutations = {
         }
        
     },
+
+    ADD_POSTS (state, posts) {
+        state.posts.push(...posts)
+    },
+
+    ADD_POST (state, posts) {
+        state.posts.unshift(posts)
+    },
   
     DELETE_COMMENT (state, comment) {
         if(comment.reponse){
@@ -40,8 +54,28 @@ export const mutations = {
     }
   };
 
+export const actions = {
+    getPosts : function(store, posts){
+        store.commit('ADD_POSTS', posts)
+    },
+
+    getComments : function(store, comments){
+        store.commit('ADD_COMMENTS', comments)
+    },
+
+
+    addComments : function(store, comments){
+        store.commit('ADD_COMMENT', comments)
+    },
+
+    addPosts: function(store, posts){
+           store.commit('ADD_POST', posts)
+    }
+};
 
 export default new Vuex.Store({
     state: state,
-    mutations: mutations
+    mutations: mutations,
+    getters: getters,
+    actions: actions
 })
