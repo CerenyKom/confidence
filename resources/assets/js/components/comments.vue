@@ -3,7 +3,7 @@
     <div class="ui inverted active dimmer" v-if="loading">
        <div class="ui text loader"> Recuperation des commentaires ... </div>
     </div>
-    <comment :comment="comment"  v-bind:index="index"  v-bind:key="comment.id" v-for="(comment, index) in comments"></comment>
+    <comment :comment="comment"  v-bind:index="index"  v-bind:key="comment.id" v-for="(comment, index) in comments" v-if="com"></comment>
     <comment-form :id="id" :model="model" :reply="0"></comment-form>
   </div>
 </template>
@@ -39,7 +39,8 @@
 
         props : { 
             id : Number,
-            model: String
+            model: String,
+            com : Number
         },
 
         mounted : function () {

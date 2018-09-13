@@ -29,6 +29,6 @@ let e = new Echo({
 });
 
 e.channel('channel-demo')
-  .listen('PostCreatedEvent', (e) => {
+  .listen('PostCreatedEvent', function(e) {
       console.log(e)
 });

@@ -20,9 +20,8 @@
             <div class="col-md-1"></div>
             <div class="col-md-11">
                   <comment :comment="reponse"  v-bind:index="index"  v-bind:key="reponse.id" v-for="(reponse, index) in comment.replies"></comment>
-                  <comment-form :id="comment.post_id" :model="comment.post_type" :reply="comment.id" v-if="comment.reponse == 1"></comment-form>
+                  <comment-form :id="comment.post_id" :model="comment.post_type" :reply="comment.id" v-if="comment.reponse === 1"></comment-form>
             </div>
-       
         </div>
     </div>
 </template>

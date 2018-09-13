@@ -1,5 +1,5 @@
 <template>
-    <form action="" @submit.prevent="addPostL" style="postion: relative;">
+    <form action="" @submit.prevent="addPostL" style="position: relative;">
         <div class="ui inverted active dimmer" v-if="loading">
             <div class="ui text loader">Chargement ...</div>
         </div>
@@ -43,10 +43,12 @@
                 axios.post('/Post', { titre_post : this.post_title, contenue_post : this.post_content }).then((Response)=> {
                     this.loading = true;
                     this.addPosts(Response.data);
+                    this.post_title = '';
+                    this.post_content = '';
                 }).catch((Response)=> {
                      this.error = Response.data;
                 }).then(()=> {
-                    this.loading = false
+                    this.loading = false;
                 })
             }
         }

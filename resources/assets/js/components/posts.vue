@@ -38,7 +38,7 @@
                     </div>
                     <hr>
                     <div class="comment">
-                        <comments model="Post" :id="post.id"></comments>
+                        <comments model="Post" :id="post.id" :com="post.com"></comments>
                     </div>
                 </div>
             </div>

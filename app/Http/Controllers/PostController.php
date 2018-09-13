@@ -27,7 +27,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post =  user_post::where('id', '>', '0')->orderBy('id', 'DESC')->get() ;
+        $post =  user_post::all();
+        $event = new PostCreatedEvent($post);
+        event($event);
         return Response::json($post, 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -49,15 +51,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        Post::create([
-            'titre_post' => $request->titre_post,
-            'contenue_post' => $request->contenue_post,
+        $newpost = Post::create([
+            'titre_post' => $request->titre,
+            'contenue_post' => $request->post,
             'user_id' => Auth::user()->id,
         ]);
-        $newpost =  user_post::orderBy('created_at', 'DESC')->first();
-        $event = new PostCreatedEvent($newpost->toArray());
-        broadcast($event)->toOthers();
-         return Response::json($newpost, 200, [], JSON_NUMERIC_CHECK);
+        return Response::json($newpost, 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
